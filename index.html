@@ -460,7 +460,6 @@
     });
     
     map.on('locationfound', function(e) {
-      console.log(e);
       //8046.72 meters = 5 miles
       var radius = 80000;
 //       var rmiles = (radius/1609.34).toFixed(0); 
@@ -480,18 +479,15 @@
           return store
         }
       });
-      console.log(storesWithin);
       var nearest = turf.nearest(point, stores.toGeoJSON());
-      console.log(nearest);
       if (nearest.properties.name) {
-        $("#infoDivInner").html("Location found!<br>Your nearest store is " + "<strong>" + nearest.properties.name + "</strong>");
+        $("#infoDivInner").html("Location found!<br>Your nearest hospital is " + "<strong>" + nearest.properties.name + "</strong>");
         circle = new L.circleMarker([nearest.geometry.coordinates[1],nearest.geometry.coordinates[0]], {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.5,
           radius: 50,
         }).addTo(map);
-        console.log(circle);
         hasCircle = 1;
       }
       $("#storeinfo").show();
